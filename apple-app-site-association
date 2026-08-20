@@ -5,7 +5,7 @@
       {
         "appID": "PQKDAJF4ZL.com.copaair.copaAirlines.dev",
         "paths": [
-          "/ios/com.copaair.copaAirlines.dev/*"
+          "/app-callback*"
         ]
       }
     ]
