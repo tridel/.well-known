@@ -1,0 +1,18 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "PQKDAJF4ZL.com.copaair.copaAirlines.dev",
+        "paths": [
+          "/ios/com.copaair.copaAirlines.dev/*"
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "PQKDAJF4ZL.com.copaair.copaAirlines.dev"
+    ]
+  }
+}
