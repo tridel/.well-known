@@ -32,18 +32,25 @@
     <pre id="cookieDisplay">Cargando cookies...</pre>
 
     <script>
-         function callbackURL() {
-      const ua = navigator.userAgent;
-      // Matchea "OS 17_4" / "OS 17_4_1" en iPhone/iPad
+          function callbackURL() {
+    const ua = navigator.userAgent;
+    const isIOS = /iPhone|iPad|iPod/.test(ua);
+
+    if (isIOS) {
       const m = ua.match(/OS (\d+)_(\d+)(?:_(\d+))? like Mac OS X/);
-      if (!m) return 'copa-oauth-test://app-callback'; // fallback seguro
-      const major = parseInt(m[1], 10);
-      const minor = parseInt(m[2], 10);
-      const supportsHttpsCallback = (major > 17) || (major === 17 && minor >= 4);
-      return supportsHttpsCallback
-        ? 'https://tridel.github.io/app-callback'
-        : 'copa-oauth-test://app-callback';
+      if (m) {
+        const major = parseInt(m[1], 10);
+        const minor = parseInt(m[2], 10);
+        const iOSSupportsHttpsCallback = (major > 17) || (major === 17 && minor >= 4);
+        if (!iOSSupportsHttpsCallback) {
+          return 'copa-oauth-test://app-callback';
+        }
+      }
     }
+
+    // Android (Auth Tab https + assetlinks) e iOS 17.4+ (ASWebAuth https callback)
+    return 'https://tridel.github.io/app-callback';
+  }
 
     document.getElementById('btn').addEventListener('click', function () {
       window.location.href = callbackURL();
