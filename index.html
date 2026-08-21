@@ -59,7 +59,7 @@
 
     // Retorno por defecto (puedes adaptarlo si usas HTTPS callbacks)
     if (toParam) {
-      return `https://tridel.github.io{encodeURIComponent(toParam)}`;
+      return `https://tridel.github.io/app-callback?to=${encodeURIComponent(toParam)}`;
     }
     return 'https://tridel.github.io/app-callback';
 }
