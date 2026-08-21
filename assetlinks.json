@@ -1,14 +1,19 @@
 [
   {
-    "relation": [
-      "delegate_permission/common.handle_all_urls"
-    ],
+    "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.mttnow.android.copa.production",
+      "package_name": "com.copaair.copaAirlines.dev",
       "sha256_cert_fingerprints": [
         "CA:EE:22:81:56:0C:2F:78:C1:67:3D:1A:9E:4D:96:D6:43:32:BD:F9:9D:B4:26:01:00:23:BA:0F:FC:7D:DA:98"
       ]
+    },
+    "relation_extensions": {
+      "delegate_permission/common.handle_all_urls": {
+        "dynamic_app_link_components": [
+          { "/": "/app-callback*" }
+        ]
+      }
     }
   }
 ]
