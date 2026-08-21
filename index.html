@@ -20,7 +20,6 @@
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
     }
-
     * { box-sizing: border-box; }
     body{
       margin:0;
@@ -32,43 +31,13 @@
         radial-gradient(800px 500px at 90% 30%, rgba(255,92,122,.18), transparent 55%),
         linear-gradient(180deg, #0b1220, #070b14 70%);
     }
-
-    .container{
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 28px 16px 56px;
-    }
-
-    header{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:16px;
-      margin-bottom: 18px;
-    }
-
-    .title{
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-    }
-
-    h1{
-      font-size: 22px;
-      margin:0;
-      letter-spacing: .2px;
-    }
-    .subtitle{
-      margin:0;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.4;
-    }
-
+    .container{ max-width: 980px; margin: 0 auto; padding: 28px 16px 56px; }
+    header{ display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom: 18px; }
+    .title{ display:flex; flex-direction:column; gap:6px; }
+    h1{ font-size: 22px; margin:0; letter-spacing: .2px; }
+    .subtitle{ margin:0; color: var(--muted); font-size: 14px; line-height: 1.4; }
     .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
+      display:inline-flex; align-items:center; gap:10px;
       padding: 10px 12px;
       background: var(--card);
       border: 1px solid var(--card-border);
@@ -78,56 +47,17 @@
       font-size: 13px;
       white-space: nowrap;
     }
-
-    .grid{
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 16px;
-      margin-top: 16px;
-    }
-
-    @media (max-width: 880px){
-      .grid { grid-template-columns: 1fr; }
-      header { flex-direction: column; }
-      .pill { width: fit-content; }
-    }
-
-    .card{
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-
+    .grid{ display:grid; grid-template-columns: 1.15fr .85fr; gap: 16px; margin-top: 16px; }
+    @media (max-width: 880px){ .grid { grid-template-columns: 1fr; } header { flex-direction: column; } }
+    .card{ background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius); box-shadow: var(--shadow); overflow:hidden; }
     .card-header{
       padding: 14px 16px;
       border-bottom: 1px solid rgba(255,255,255,.08);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
+      display:flex; align-items:center; justify-content:space-between; gap: 12px;
     }
-
-    .card-title{
-      margin:0;
-      font-size: 14px;
-      letter-spacing: .25px;
-      color: var(--muted);
-      text-transform: uppercase;
-    }
-
-    .card-body{
-      padding: 16px;
-    }
-
-    .btn-row{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
+    .card-title{ margin:0; font-size: 14px; letter-spacing: .25px; color: var(--muted); text-transform: uppercase; }
+    .card-body{ padding: 16px; }
+    .btn-row{ display:flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
     button, .btn-link{
       appearance:none;
       border: 1px solid rgba(255,255,255,.14);
@@ -140,34 +70,13 @@
       font-weight: 600;
       font-size: 14px;
     }
-    button:hover, .btn-link:hover{
-      background: rgba(255,255,255,.10);
-      border-color: rgba(255,255,255,.22);
-    }
+    button:hover, .btn-link:hover{ background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.22); }
     button:active, .btn-link:active{ transform: translateY(1px); }
-
-    .primary{
-      background: linear-gradient(180deg, var(--primary), var(--primary-2));
-      border-color: rgba(79,140,255,.55);
-    }
-    .primary:hover{
-      border-color: rgba(79,140,255,.85);
-      background: linear-gradient(180deg, #6aa0ff, var(--primary-2));
-    }
-
-    .danger{
-      background: rgba(255,92,122,.14);
-      border-color: rgba(255,92,122,.35);
-      color: #ffdbe2;
-    }
-
-    .btn-link{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      text-decoration:none;
-    }
-
+    .primary{ background: linear-gradient(180deg, var(--primary), var(--primary-2)); border-color: rgba(79,140,255,.55); }
+    .primary:hover{ border-color: rgba(79,140,255,.85); background: linear-gradient(180deg, #6aa0ff, var(--primary-2)); }
+    .danger{ background: rgba(255,92,122,.14); border-color: rgba(255,92,122,.35); color: #ffdbe2; }
+    .btn-link{ display:inline-flex; align-items:center; justify-content:center; text-decoration:none; }
+    .label{ font-size: 12px; color: var(--muted); margin: 10px 0 6px; }
     .mono{
       font-family: var(--mono);
       font-size: 12.5px;
@@ -181,24 +90,16 @@
       white-space: pre-wrap;
       word-break: break-word;
     }
-
-    .label{
-      font-size: 12px;
-      color: var(--muted);
-      margin: 10px 0 6px;
-    }
+    .section-note{ color: var(--muted); font-size: 13px; margin: 6px 0 12px; }
   </style>
 </head>
 
 <body>
   <div class="container">
-
     <header>
       <div class="title">
         <h1>Callback & Cookies</h1>
-        <p class="subtitle">
-          Página de pruebas ordenada: navegación al callback (HTTPS o custom scheme según iOS) y lectura de cookies del dominio.
-        </p>
+        <p class="subtitle">Pruebas de navegación usando: href, assign() y replace().</p>
       </div>
       <div class="pill" id="envPill">Detectando entorno…</div>
     </header>
@@ -207,15 +108,34 @@
       <!-- Navegación -->
       <section class="card">
         <div class="card-header">
-          <h2 class="card-title">Acciones</h2>
-          <a class="btn-link" href="https://tridel.github.io/app-callback" rel="noopener">Abrir callback (directo)</a>
+          <h2 class="card-title">Acciones (callback)</h2>
+          <a class="btn-link" href="https://tridel.github.io/app-callback" rel="noopener">Abrir callback (link)</a>
         </div>
 
         <div class="card-body">
+          <p class="section-note">
+            Tip: <b>assign()</b> agrega entrada al historial. <b>replace()</b> reemplaza la actual (no vuelve con back).
+          </p>
+
+          <div class="label">Navegación “normal” (href)</div>
           <div class="btn-row">
-            <button class="primary" id="btnApp" type="button">Volver al app</button>
-            <button id="btnAddTrip" type="button">Ir a add_trip</button>
-            <button id="btnNotifications" type="button">Ir a notifications</button>
+            <button class="primary" id="btnHrefApp" type="button">href: app</button>
+            <button id="btnHrefAddTrip" type="button">href: add_trip</button>
+            <button id="btnHrefNotifications" type="button">href: notifications</button>
+          </div>
+
+          <div class="label">Probar con location.assign()</div>
+          <div class="btn-row">
+            <button class="primary" id="btnAssignApp" type="button">assign: app</button>
+            <button id="btnAssignAddTrip" type="button">assign: add_trip</button>
+            <button id="btnAssignNotifications" type="button">assign: notifications</button>
+          </div>
+
+          <div class="label">Probar con location.replace()</div>
+          <div class="btn-row">
+            <button class="primary" id="btnReplaceApp" type="button">replace: app</button>
+            <button id="btnReplaceAddTrip" type="button">replace: add_trip</button>
+            <button id="btnReplaceNotifications" type="button">replace: notifications</button>
           </div>
 
           <div class="label">Próxima URL (preview)</div>
@@ -229,7 +149,6 @@
           <h2 class="card-title">Cookies del dominio</h2>
           <button class="danger" id="btnRefreshCookies" type="button">Refrescar</button>
         </div>
-
         <div class="card-body">
           <pre class="mono" id="cookieDisplay">Cargando…</pre>
         </div>
@@ -250,8 +169,6 @@
         if (m) {
           const major = parseInt(m[1], 10);
           const minor = parseInt(m[2], 10);
-
-          // iOS 17.4+ soporta https callback en ASWebAuth (según tu regla)
           const iOSSupportsHttpsCallback = (major > 17) || (major === 17 && minor >= 4);
 
           if (!iOSSupportsHttpsCallback) {
@@ -267,17 +184,29 @@
         : httpsBase;
     }
 
-    function showNextUrl(toParam) {
+    function setPreview(toParam) {
       const url = callbackURL(toParam);
       document.getElementById("nextUrl").textContent = url;
       return url;
     }
 
-    function go(toParam) {
-      const url = showNextUrl(toParam);
+    // Acciones de navegación
+    function goHref(toParam) {
+      const url = setPreview(toParam);
       window.location.href = url;
     }
 
+    function goAssign(toParam) {
+      const url = setPreview(toParam);
+      window.location.assign(url);
+    }
+
+    function goReplace(toParam) {
+      const url = setPreview(toParam);
+      window.location.replace(url);
+    }
+
+    // Cookies
     function mostrarCookies() {
       const cookies = document.cookie;
       const display = document.getElementById("cookieDisplay");
@@ -292,13 +221,25 @@
       }
     }
 
-    // Bind botones
-    document.getElementById("btnApp").addEventListener("click", () => go());
-    document.getElementById("btnAddTrip").addEventListener("click", () => go("add_trip"));
-    document.getElementById("btnNotifications").addEventListener("click", () => go("notifications"));
+    // Bind botones: href
+    document.getElementById("btnHrefApp").addEventListener("click", () => goHref());
+    document.getElementById("btnHrefAddTrip").addEventListener("click", () => goHref("add_trip"));
+    document.getElementById("btnHrefNotifications").addEventListener("click", () => goHref("notifications"));
+
+    // Bind botones: assign
+    document.getElementById("btnAssignApp").addEventListener("click", () => goAssign());
+    document.getElementById("btnAssignAddTrip").addEventListener("click", () => goAssign("add_trip"));
+    document.getElementById("btnAssignNotifications").addEventListener("click", () => goAssign("notifications"));
+
+    // Bind botones: replace
+    document.getElementById("btnReplaceApp").addEventListener("click", () => goReplace());
+    document.getElementById("btnReplaceAddTrip").addEventListener("click", () => goReplace("add_trip"));
+    document.getElementById("btnReplaceNotifications").addEventListener("click", () => goReplace("notifications"));
+
+    // Bind cookies
     document.getElementById("btnRefreshCookies").addEventListener("click", mostrarCookies);
 
-    // Info de entorno
+    // Entorno + init
     (function initEnv() {
       const ua = navigator.userAgent;
       const isIOS = /iPhone|iPad|iPod/.test(ua);
@@ -307,21 +248,15 @@
       let iosVer = "";
       if (isIOS) {
         const m = ua.match(/OS (\d+)_(\d+)(?:_(\d+))? like Mac OS X/);
-        if (m) iosVer = ` iOS ${m[1]}.${m[2]}`;
+        if (m) iosVer = ` ${m[1]}.${m[2]}`;
       }
 
-      const env =
-        (isIOS ? `iOS${iosVer}` : isAndroid ? "Android" : "Desktop/Other");
+      const env = isIOS ? `iOS${iosVer}` : isAndroid ? "Android" : "Desktop/Other";
+      document.getElementById("envPill").textContent = `${env}`;
 
-      document.getElementById("envPill").textContent =
-        `${env} • UA: ${ua.slice(0, 45)}${ua.length > 45 ? "…" : ""}`;
-
-      // Preview inicial
-      showNextUrl();
+      setPreview();
+      mostrarCookies();
     })();
-
-    // Inicial
-    mostrarCookies();
   </script>
 </body>
 </html>
