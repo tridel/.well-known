@@ -1,99 +1,327 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Mostrar Cookies</title>
-    <a href="https://tridel.github.io/app-callback">Ir al callback</a>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Callback & Cookies</title>
 
-    <button id="btn">Volver al app</button>
+  <style>
+    :root{
+      --bg: #0b1220;
+      --card: rgba(255,255,255,.06);
+      --card-border: rgba(255,255,255,.12);
+      --text: #e8eefc;
+      --muted: rgba(232,238,252,.75);
+      --primary: #4f8cff;
+      --primary-2: #2e6bff;
+      --danger: #ff5c7a;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+    }
 
-      <button id="btnaddtrip">Volver a addtrip</button>
+    * { box-sizing: border-box; }
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(1000px 600px at 10% 10%, rgba(79,140,255,.25), transparent 60%),
+        radial-gradient(800px 500px at 90% 30%, rgba(255,92,122,.18), transparent 55%),
+        linear-gradient(180deg, #0b1220, #070b14 70%);
+    }
 
-      <button id="btnnotification">Volver a notifications</button>
+    .container{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 16px 56px;
+    }
 
+    header{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom: 18px;
+    }
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background: #f4f4f4;
-        }
-        h1 {
-            color: #333;
-        }
-        pre {
-            background: #fff;
-            border: 1px solid #ccc;
-            padding: 15px;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-        
-    </style>
+    .title{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    h1{
+      font-size: 22px;
+      margin:0;
+      letter-spacing: .2px;
+    }
+    .subtitle{
+      margin:0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 880px){
+      .grid { grid-template-columns: 1fr; }
+      header { flex-direction: column; }
+      .pill { width: fit-content; }
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .card-header{
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+
+    .card-title{
+      margin:0;
+      font-size: 14px;
+      letter-spacing: .25px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .card-body{
+      padding: 16px;
+    }
+
+    .btn-row{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    button, .btn-link{
+      appearance:none;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor:pointer;
+      transition: transform .05s ease, background .2s ease, border-color .2s ease;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    button:hover, .btn-link:hover{
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.22);
+    }
+    button:active, .btn-link:active{ transform: translateY(1px); }
+
+    .primary{
+      background: linear-gradient(180deg, var(--primary), var(--primary-2));
+      border-color: rgba(79,140,255,.55);
+    }
+    .primary:hover{
+      border-color: rgba(79,140,255,.85);
+      background: linear-gradient(180deg, #6aa0ff, var(--primary-2));
+    }
+
+    .danger{
+      background: rgba(255,92,122,.14);
+      border-color: rgba(255,92,122,.35);
+      color: #ffdbe2;
+    }
+
+    .btn-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+    }
+
+    .mono{
+      font-family: var(--mono);
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: rgba(232,238,252,.9);
+      background: rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.08);
+      padding: 12px;
+      border-radius: 12px;
+      overflow:auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .label{
+      font-size: 12px;
+      color: var(--muted);
+      margin: 10px 0 6px;
+    }
+  </style>
 </head>
+
 <body>
-    <h1>Cookies del dominio</h1>
-    <pre id="cookieDisplay">Cargando cookies...</pre>
+  <div class="container">
 
-    <script>
-         function callbackURL(toParam) {
-    const ua = navigator.userAgent;
-    const isIOS = /iPhone|iPad|iPod/.test(ua);
+    <header>
+      <div class="title">
+        <h1>Callback & Cookies</h1>
+        <p class="subtitle">
+          Página de pruebas ordenada: navegación al callback (HTTPS o custom scheme según iOS) y lectura de cookies del dominio.
+        </p>
+      </div>
+      <div class="pill" id="envPill">Detectando entorno…</div>
+    </header>
 
-    if (isIOS) {
-      const m = ua.match(/OS (\d+)_(\d+)(?:_(\d+))? like Mac OS X/);
-      if (m) {
-        const major = parseInt(m[1], 10);
-        const minor = parseInt(m[2], 10); // Corregido: m[2] para la versión minor
-        const iOSSupportsHttpsCallback = (major > 17) || (major === 17 && minor >= 4);
-        
-        if (!iOSSupportsHttpsCallback) {
-          // Si el parámetro existe, lo agregamos a la URL del esquema personalizado
-          if (toParam) {
-            return `copa-oauth-test://app-callback?to=${encodeURIComponent(toParam)}`;
+    <div class="grid">
+      <!-- Navegación -->
+      <section class="card">
+        <div class="card-header">
+          <h2 class="card-title">Acciones</h2>
+          <a class="btn-link" href="https://tridel.github.io/app-callback" rel="noopener">Abrir callback (directo)</a>
+        </div>
+
+        <div class="card-body">
+          <div class="btn-row">
+            <button class="primary" id="btnApp" type="button">Volver al app</button>
+            <button id="btnAddTrip" type="button">Ir a add_trip</button>
+            <button id="btnNotifications" type="button">Ir a notifications</button>
+          </div>
+
+          <div class="label">Próxima URL (preview)</div>
+          <pre class="mono" id="nextUrl">—</pre>
+        </div>
+      </section>
+
+      <!-- Cookies -->
+      <section class="card">
+        <div class="card-header">
+          <h2 class="card-title">Cookies del dominio</h2>
+          <button class="danger" id="btnRefreshCookies" type="button">Refrescar</button>
+        </div>
+
+        <div class="card-body">
+          <pre class="mono" id="cookieDisplay">Cargando…</pre>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    function callbackURL(toParam) {
+      const ua = navigator.userAgent;
+      const isIOS = /iPhone|iPad|iPod/.test(ua);
+
+      const httpsBase = "https://tridel.github.io/app-callback";
+      const schemeBase = "copa-oauth-test://app-callback";
+
+      if (isIOS) {
+        const m = ua.match(/OS (\d+)_(\d+)(?:_(\d+))? like Mac OS X/);
+        if (m) {
+          const major = parseInt(m[1], 10);
+          const minor = parseInt(m[2], 10);
+
+          // iOS 17.4+ soporta https callback en ASWebAuth (según tu regla)
+          const iOSSupportsHttpsCallback = (major > 17) || (major === 17 && minor >= 4);
+
+          if (!iOSSupportsHttpsCallback) {
+            return toParam
+              ? `${schemeBase}?to=${encodeURIComponent(toParam)}`
+              : schemeBase;
           }
-          return 'copa-oauth-test://app-callback';
         }
+      }
+
+      return toParam
+        ? `${httpsBase}?to=${encodeURIComponent(toParam)}`
+        : httpsBase;
+    }
+
+    function showNextUrl(toParam) {
+      const url = callbackURL(toParam);
+      document.getElementById("nextUrl").textContent = url;
+      return url;
+    }
+
+    function go(toParam) {
+      const url = showNextUrl(toParam);
+      window.location.href = url;
+    }
+
+    function mostrarCookies() {
+      const cookies = document.cookie;
+      const display = document.getElementById("cookieDisplay");
+
+      if (cookies) {
+        display.textContent = cookies
+          .split("; ")
+          .map(c => `• ${c}`)
+          .join("\n");
+      } else {
+        display.textContent = "No hay cookies almacenadas.";
       }
     }
 
-    // Retorno por defecto (puedes adaptarlo si usas HTTPS callbacks)
-    if (toParam) {
-      return `https://tridel.github.io/app-callback?to=${encodeURIComponent(toParam)}`;
-    }
-    return 'https://tridel.github.io/app-callback';
-}
+    // Bind botones
+    document.getElementById("btnApp").addEventListener("click", () => go());
+    document.getElementById("btnAddTrip").addEventListener("click", () => go("add_trip"));
+    document.getElementById("btnNotifications").addEventListener("click", () => go("notifications"));
+    document.getElementById("btnRefreshCookies").addEventListener("click", mostrarCookies);
 
-    // Android (Auth Tab https + assetlinks) e iOS 17.4+ (ASWebAuth https callback)
-    return 'https://tridel.github.io/app-callback';
-  }
+    // Info de entorno
+    (function initEnv() {
+      const ua = navigator.userAgent;
+      const isIOS = /iPhone|iPad|iPod/.test(ua);
+      const isAndroid = /Android/.test(ua);
 
-    document.getElementById('btn').addEventListener('click', function () {
-      window.location.href = callbackURL();
-    });
+      let iosVer = "";
+      if (isIOS) {
+        const m = ua.match(/OS (\d+)_(\d+)(?:_(\d+))? like Mac OS X/);
+        if (m) iosVer = ` iOS ${m[1]}.${m[2]}`;
+      }
 
-   document.getElementById('btnaddtrip').addEventListener('click', function () {
-      window.location.href = callbackURL("add_trip");
-    });
+      const env =
+        (isIOS ? `iOS${iosVer}` : isAndroid ? "Android" : "Desktop/Other");
 
-    document.getElementById('btnnotification').addEventListener('click', function () {
-      window.location.href = callbackURL("notifications");
-    });
- 
-        function mostrarCookies() {
-            const cookies = document.cookie;
-            const display = document.getElementById("cookieDisplay");
+      document.getElementById("envPill").textContent =
+        `${env} • UA: ${ua.slice(0, 45)}${ua.length > 45 ? "…" : ""}`;
 
-            if (cookies) {
-                display.textContent = cookies.split('; ')
-                    .map(c => `• ${c}`)
-                    .join('\n');
-            } else {
-                display.textContent = "No hay cookies almacenadas.";
-            }
-        }
+      // Preview inicial
+      showNextUrl();
+    })();
 
-        mostrarCookies();
-    </script>
+    // Inicial
+    mostrarCookies();
+  </script>
 </body>
 </html>
