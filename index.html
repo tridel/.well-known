@@ -7,6 +7,10 @@
 
     <button id="btn">Volver al app</button>
 
+      <button id="btnaddtrip">Volver a addtrip</button>
+
+      <button id="btnnotification">Volver a notifications</button>
+
 
     <style>
         body {
@@ -32,7 +36,7 @@
     <pre id="cookieDisplay">Cargando cookies...</pre>
 
     <script>
-          function callbackURL() {
+         function callbackURL(toParam) {
     const ua = navigator.userAgent;
     const isIOS = /iPhone|iPad|iPod/.test(ua);
 
@@ -40,13 +44,25 @@
       const m = ua.match(/OS (\d+)_(\d+)(?:_(\d+))? like Mac OS X/);
       if (m) {
         const major = parseInt(m[1], 10);
-        const minor = parseInt(m[2], 10);
+        const minor = parseInt(m[2], 10); // Corregido: m[2] para la versión minor
         const iOSSupportsHttpsCallback = (major > 17) || (major === 17 && minor >= 4);
+        
         if (!iOSSupportsHttpsCallback) {
+          // Si el parámetro existe, lo agregamos a la URL del esquema personalizado
+          if (toParam) {
+            return `copa-oauth-test://app-callback?to=${encodeURIComponent(toParam)}`;
+          }
           return 'copa-oauth-test://app-callback';
         }
       }
     }
+
+    // Retorno por defecto (puedes adaptarlo si usas HTTPS callbacks)
+    if (toParam) {
+      return `https://tu-dominio.com{encodeURIComponent(toParam)}`;
+    }
+    return 'https://tu-dominio.com';
+}
 
     // Android (Auth Tab https + assetlinks) e iOS 17.4+ (ASWebAuth https callback)
     return 'https://tridel.github.io/app-callback';
@@ -54,6 +70,14 @@
 
     document.getElementById('btn').addEventListener('click', function () {
       window.location.href = callbackURL();
+    });
+
+   document.getElementById('btnaddtrip').addEventListener('click', function () {
+      window.location.href = callbackURL("add_trip");
+    });
+
+    document.getElementById('btnnotification').addEventListener('click', function () {
+      window.location.href = callbackURL("notifications");
     });
  
         function mostrarCookies() {
